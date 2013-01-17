@@ -214,7 +214,6 @@ echo "You can run 'make' and 'make install' now."
 # Local Variables:
 # mode: sh
 # tab-width: 8
-# c-basic-offset: 2
 # indent-tabs-mode: nil
 # fill-column: 78
 # coding: utf-8
