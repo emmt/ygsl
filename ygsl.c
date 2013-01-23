@@ -111,9 +111,9 @@ PLUG_API void y_error(const char *) __attribute__ ((noreturn));
 static void fnerr(const char *name, char *msg) __attribute__ ((noreturn));
 static void setup(void);
 static void error_handler(const char *reason,
-			  const char *file,
-			  int line,
-			  int gsl_errno);
+                          const char *file,
+                          int line,
+                          int gsl_errno);
 
 static int first_time = 1;
 
@@ -124,9 +124,9 @@ static void setup(void)
 }
 
 static void error_handler(const char *reason,
-			  const char *file,
-			  int line,
-			  int status)
+                          const char *file,
+                          int line,
+                          int status)
 {
   if (reason == NULL || reason[0] == '\0') {
     reason = gsl_strerror(status);
@@ -203,9 +203,9 @@ static long get_flags(int iarg, long default_value)
 /*---------------------------------------------------------------------------*/
 
 static void sf_driver_1(int argc, const char *name,
-			double (*fn)(double x, gsl_mode_t mode),
-			int (*fn_e)(double x, gsl_mode_t mode,
-				    gsl_sf_result *result))
+                        double (*fn)(double x, gsl_mode_t mode),
+                        int (*fn_e)(double x, gsl_mode_t mode,
+                                    gsl_sf_result *result))
 {
   gsl_sf_result r;
   gsl_mode_t mode;
@@ -260,8 +260,8 @@ FN(gsl_sf_ellint_Ecomp)
 /*---------------------------------------------------------------------------*/
 
 static void sf_driver_2(int argc, const char *name,
-			double (*fn)(double x),
-			int (*fn_e)(double x, gsl_sf_result *result))
+                        double (*fn)(double x),
+                        int (*fn_e)(double x, gsl_sf_result *result))
 {
   gsl_sf_result r;
   long i, ntot, flags, dims[Y_DIMSIZE];
@@ -386,8 +386,8 @@ FN(gsl_sf_eta)
 #undef FN
 
 static void sf_driver_3(int argc, const char *name,
-			double (*fn)(int l, double x),
-			int (*fn_e)(int l, double x, gsl_sf_result *result))
+                        double (*fn)(int l, double x),
+                        int (*fn_e)(int l, double x, gsl_sf_result *result))
 {
   gsl_sf_result r;
   long i, ntot, flags, dims[Y_DIMSIZE];
@@ -441,9 +441,9 @@ FN(gsl_sf_legendre_Ql)
 #undef FN
 
 static void sf_driver_4(int argc, const char *name,
-			double (*fn)(double nu, double x),
-			int (*fn_e)(double nu, double x,
-				    gsl_sf_result *result))
+                        double (*fn)(double nu, double x),
+                        int (*fn_e)(double nu, double x,
+                                    gsl_sf_result *result))
 {
   double nu;
   gsl_sf_result r;
@@ -491,8 +491,9 @@ FN(gsl_sf_bessel_Knu_scaled)
 /*
  * Local Variables:
  * mode: C
- * tab-width: 8
  * c-basic-offset: 2
+ * c-label-minimum-indentation: 0
+ * tab-width: 8
  * indent-tabs-mode: nil
  * fill-column: 78
  * coding: utf-8

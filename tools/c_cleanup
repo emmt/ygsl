@@ -1,13 +1,25 @@
 #! /bin/sh
 #
-# This script is a filter to clenaup C files:
+# This script is a filter to cleanup C/C++ files.  The following
+# operations are performed:
 #  - Trailing spaces are removed.
 #  - Unix-like end of line markers are used (LF).
-#  - Code is re-indent.
+#  - Code is re-indented by AStyle.
 #
 
+debug=yes
+bypass=no
+
+if test "$debug" = "yes"; then
+  echo >&2 "command -----> $0 $@"
+fi
+
+# Simply execute "cat" to bypass the filter:
+test "$bypass" = "yes" && exec cat
+
 ## AStyle options:
-options="--options=none --mode=c --preserve-date --quiet \
+astyle=/usr/bin/astyle
+options="--options=none --mode=c --quiet --preserve-date \
   --style=stroustrup --indent=spaces=2 \
   --pad-header --indent-labels --lineend=linux \
   --min-conditional-indent=0 --max-instatement-indent=80 \
@@ -16,16 +28,46 @@ options="--options=none --mode=c --preserve-date --quiet \
 # --suffix=none 
 
 ## Option --align-reference=... is only available after version 2.02.
-version=$(astyle --version 2>&1 \
+version=$($astyle --version 2>&1 \
   | sed 's/^[^0-9]*\([.0-9]*\).*/\1/;s/0*\([1-9][0-9]*\|0\)/\1/g')
+if test "$debug" = "yes"; then
+  echo >&2 "version -----> $version"
+fi
 major=$(echo "$version" | cut -d. -f1)
 minor=$(echo "$version" | cut -d. -f2)
 if test "$major" -gt 2 -o \( $major -eq 2 -a $minor -ge 2 \); then
   options="$options --align-reference=name"
 fi
-#echo >&2 "major --> $major"
-#echo >&2 "minor --> $minor"
-astyle $options "$@"
+if test "$debug" = "yes"; then
+  echo >&2 "major -------> $major"
+  echo >&2 "minor -------> $minor"
+fi
+
+# For some reasons, AStyle cannot work as a filter with GIT.  So I first save
+# the input in a first temporary file, run AStyle on it to generate an output
+# file and cat the output file.
+
+# This script can be as a filter (with no arguments) or not.
+if [ $# -gt 0 ]; then
+  $astyle $options "$@"
+  code=$?
+else
+ tmp_inp=$(mktemp "/tmp/c_cleanup_inp-XXXXXXXXXX")
+ tmp_out=$(mktemp "/tmp/c_cleanup_out-XXXXXXXXXX")
+ cat >"$tmp_inp"
+ $astyle $options <"$tmp_inp" >"$tmp_out"
+ code=$?
+ test $code -eq 0 && cat "$tmp_out"
+ if test "$debug" = "yes"; then
+   echo >&2 "input -------> $tmp_inp"
+   echo >&2 "output ------> $tmp_out"
+   echo >&2 "status ------> $code"
+ else
+   rm -f "$tmp_inp" "$tmp_out"
+ fi
+fi
+return $code
+
 
 ## No needs to remove spaces, astyle takes care of that; otherwise add:
 ## | sed -e 's/[ 	][ 	]*$//'
