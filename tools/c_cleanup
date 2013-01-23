@@ -6,8 +6,10 @@
 #  - Unix-like end of line markers are used (LF).
 #  - Code is re-indented by AStyle.
 #
+# Note that the filter is called for every 'git-add', 'git-status', etc.
+# So it is better if it is fast...
 
-debug=yes
+debug=no
 bypass=no
 
 if test "$debug" = "yes"; then
@@ -43,31 +45,27 @@ if test "$debug" = "yes"; then
   echo >&2 "minor -------> $minor"
 fi
 
-# For some reasons, AStyle cannot work as a filter with GIT.  So I first save
-# the input in a first temporary file, run AStyle on it to generate an output
-# file and cat the output file.
 
 # This script can be as a filter (with no arguments) or not.
 if [ $# -gt 0 ]; then
   $astyle $options "$@"
   code=$?
 else
- tmp_inp=$(mktemp "/tmp/c_cleanup_inp-XXXXXXXXXX")
- tmp_out=$(mktemp "/tmp/c_cleanup_out-XXXXXXXXXX")
- cat >"$tmp_inp"
- $astyle $options <"$tmp_inp" >"$tmp_out"
- code=$?
- test $code -eq 0 && cat "$tmp_out"
- if test "$debug" = "yes"; then
-   echo >&2 "input -------> $tmp_inp"
-   echo >&2 "output ------> $tmp_out"
-   echo >&2 "status ------> $code"
- else
-   rm -f "$tmp_inp" "$tmp_out"
- fi
+  # For some reasons, AStyle cannot work as a filter with GIT.  So I first
+  # save the input in a temporary file and run AStyle on it to generate the
+  # output.
+  tmp=$(mktemp "/tmp/c_cleanup-XXXXXXXXXX")
+  cat >"$tmp"
+  $astyle $options <"$tmp"
+  code=$?
+  if test "$debug" = "yes"; then
+    echo >&2 "input -------> $tmp"
+    echo >&2 "status ------> $code"
+  else
+    rm -f "$tmp"
+  fi
 fi
 return $code
-
 
 ## No needs to remove spaces, astyle takes care of that; otherwise add:
 ## | sed -e 's/[ 	][ 	]*$//'
