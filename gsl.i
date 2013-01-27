@@ -162,7 +162,7 @@ extern gsl_sf_bessel_Jnu;
  *       Y(1,..) = value of F(X)
  *       Y(2,..) = error estimate for the value of F(X)
  *
- *    
+ *
  * SEE ALSO: gsl_sf, gsl_sf_bessel_Y0, gsl_sf_bessel_I0, gsl_sf_bessel_K0,
  *           gsl_sf_bessel_j0, gsl_sf_bessel_y0, gsl_sf_bessel_i0,
  *           gsl_sf_bessel_k0.
@@ -181,7 +181,7 @@ extern gsl_sf_bessel_Ynu;
  *   X>0.  See gsl_sf_bessel_J0 for a more detailled description of the
  *   arguments.
  *
- *    
+ *
  * SEE ALSO: gsl_sf, gsl_sf_bessel_J0.
  */
 
@@ -673,7 +673,7 @@ extern gsl_sf_taylorcoeff;
  *
  *   gsl_sf_gammastar(X) computes the regulated Gamma function:
  *       GammaStar(x) = Gamma(x) / ( sqrt(2 pi) x^(x - 1/2) exp(x) )
- *                    = 1 + 1/12x + ...     for large x 
+ *                    = 1 + 1/12x + ...     for large x
  *
  *   gsl_sf_gammainv(X) computes the reciprocal of the Gamma function
  *   1/Gamma(x) using the real Lanczos method.
@@ -767,7 +767,7 @@ extern gsl_sf_transport_5;
  *
  *   The transport functions J(n,x) are defined by the integral representations:
  *       J(n,x) = \int_0^x t^n e^t /(e^t - 1)^2 dt.
- *   
+ *
  *   If optional argument ERR is true, the result, says Y, has an
  *   additional dimension of length 2 prepended to the dimension list of X
  *   which is used to provide an estimate of the error:
