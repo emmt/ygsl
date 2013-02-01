@@ -63,6 +63,7 @@ local gsl_sf;
  *     gsl_sf_expint - exponential, hyperbolic and trigonometric integrals
  *     gsl_sf_fermi_dirac - Fermi-Dirac integrals
  *     gsl_sf_gamma - Gamma functions
+ *     gsl_sf_psi - Digamma, trigamma and polygamma functions
  *     gsl_sf_lamber - Lambert's functions
  *     gsl_sf_legendre - Legendre polynomials
  *     gsl_sf_synchrotron - synchrotron functions
@@ -687,6 +688,28 @@ extern gsl_sf_taylorcoeff;
  *       Y(1,..) = value of F(X)
  *       Y(2,..) = error estimate for the value of F(X)
  *
+ *
+ * SEE ALSO: gsl_sf.
+ */
+
+extern gsl_sf_psi;
+extern gsl_sf_psi_1piy;
+extern gsl_sf_psi_1;
+extern gsl_sf_psi_n;
+/* DOCUMENT gsl_sf_psi(x [, err])
+ *          gsl_sf_psi_1(x [, err])
+ *          gsl_sf_psi_n(n, x [, err])
+ *          gsl_sf_psi_1piy(x [, err])
+ *
+ *   gsl_sf_psi(X) computes the digamma function \psi(x) for X != 0.
+ *
+ *   gsl_sf_psi_1piy(Y) computes the real part of the digamma function on the
+ *   line 1+i y, \Re[\psi(1 + i y)].
+ *
+ *   gsl_sf_psi_1(X) computes the trigamma function \psi'(x) for X.
+ *
+ *   gsl_sf_psi_n(N, X) computes the polygamma function \psi^{(n)}(x)
+ *   for N >= 0, X > 0.
  *
  * SEE ALSO: gsl_sf.
  */

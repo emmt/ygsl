@@ -228,14 +228,14 @@ static void sf_driver_1(int argc, const char *name,
   x = get_array_d(0, &ntot, dims);
   if (flags & 0x1) {
     y = push_d2(dims);
-    for (i=0 ; i<ntot ; ++i) {
+    for (i = 0; i < ntot; ++i) {
       fn_e(x[i], mode, &r);
       y[2*i] = r.val;
       y[2*i + 1] = r.err;
     }
   } else {
     y = (yarg_scratch(0) ? x : ypush_d(dims));
-    for (i=0 ; i<ntot ; ++i) {
+    for (i = 0; i < ntot; ++i) {
       y[i] = fn(x[i], mode);
     }
   }
@@ -278,14 +278,14 @@ static void sf_driver_2(int argc, const char *name,
   x = get_array_d(0, &ntot, dims);
   if (flags) {
     y = push_d2(dims);
-    for (i=0 ; i<ntot ; ++i) {
+    for (i = 0; i < ntot; ++i) {
       fn_e(x[i], &r);
       y[2*i] = r.val;
       y[2*i+1] = r.err;
     }
   } else {
     y = (yarg_scratch(0) ? x : ypush_d(dims));
-    for (i=0 ; i<ntot ; ++i) {
+    for (i = 0; i < ntot; ++i) {
       y[i] = fn(x[i]);
     }
   }
@@ -383,6 +383,9 @@ FN(gsl_sf_lncosh)
 FN(gsl_sf_zeta)
 FN(gsl_sf_zetam1)
 FN(gsl_sf_eta)
+FN(gsl_sf_psi)
+FN(gsl_sf_psi_1piy)
+FN(gsl_sf_psi_1)
 #undef FN
 
 static void sf_driver_3(int argc, const char *name,
@@ -406,14 +409,14 @@ static void sf_driver_3(int argc, const char *name,
   x = get_array_d(0, &ntot, dims);
   if (flags) {
     y = push_d2(dims);
-    for (i=0 ; i<ntot ; ++i) {
+    for (i = 0; i < ntot; ++i) {
       fn_e(l, x[i], &r);
       y[2*i] = r.val;
       y[2*i+1] = r.err;
     }
   } else {
     y = (yarg_scratch(0) ? x : ypush_d(dims));
-    for (i=0 ; i<ntot ; ++i) {
+    for (i = 0; i < ntot; ++i) {
       y[i] = fn(l, x[i]);
     }
   }
@@ -438,6 +441,7 @@ FN(gsl_sf_fermi_dirac_int)
 FN(gsl_sf_taylorcoeff)
 FN(gsl_sf_legendre_Pl)
 FN(gsl_sf_legendre_Ql)
+FN(gsl_sf_psi_n)
 #undef FN
 
 static void sf_driver_4(int argc, const char *name,
@@ -462,14 +466,14 @@ static void sf_driver_4(int argc, const char *name,
   x = get_array_d(0, &ntot, dims);
   if (flags) {
     y = push_d2(dims);
-    for (i=0 ; i<ntot ; ++i) {
+    for (i = 0; i < ntot; ++i) {
       fn_e(nu, x[i], &r);
       y[2*i] = r.val;
       y[2*i+1] = r.err;
     }
   } else {
     y = (yarg_scratch(0) ? x : ypush_d(dims));
-    for (i=0 ; i<ntot ; ++i) {
+    for (i = 0; i < ntot; ++i) {
       y[i] = fn(nu, x[i]);
     }
   }
