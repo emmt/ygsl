@@ -1,3 +1,6 @@
+ * 2013-07-09: Release 1.1.0
+   Created repository on GitHub: <https://github.com/emmt/ygsl.git>
+
  * 2013-01-27:
    Add digamma, trigamma and polygamma functions.
 
