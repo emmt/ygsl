@@ -1,4 +1,4 @@
-*.[hc]     filter=cleanup-c
+*.[hc]     filter=cleanup-code
 *.i        filter=cleanup-text
 README     filter=cleanup-text
 TODO       filter=cleanup-text
