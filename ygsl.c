@@ -496,7 +496,6 @@ FN(gsl_sf_bessel_Knu_scaled)
  * Local Variables:
  * mode: C
  * c-basic-offset: 2
- * c-label-minimum-indentation: 0
  * tab-width: 8
  * indent-tabs-mode: nil
  * fill-column: 78
