@@ -88,5 +88,5 @@ standalone plug-in. You can find more informations about Yeti at
 Links
 -----
 
- * Yorick: <http://dhmunro.github.com/>;
+ * Yorick: <http://yorick.github.com/>;
  * GSL (GNU Scientific Library): <http://www.gnu.org/software/gsl/>;
