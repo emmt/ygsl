@@ -46,7 +46,7 @@ cfg_debug=no
 
 cfg_on_exit () {
   if test "$cfg_debug" = "no"; then
-    rm -f "$cfg_tmpfile"
+    rm -f "$cfg_tmpfile" "$cfg_tmpfile.i"
   fi
 }
 
@@ -93,6 +93,7 @@ options:
   --deplibs=DEPLIBS    Flags for dependencies [$cfg_deplibs], for instance:
                          --deplibs='-Lsomedir -lsomelib'
   --ldflags=LDFLAGS    Additional linker flags [$cfg_ldflags].
+  --debug              Turn debug mode on (for this script).
   -h, --help           Print this help and exit.
 EOF
 }
@@ -123,6 +124,9 @@ while test $# -ge 1; do
     -h | --help )
       cfg_help
       exit 0
+      ;;
+    --debug)
+      cfg_debug=yes
       ;;
     --arch=*)
       cfg_arch=$(cfg_opt_value "$cfg_arg")
@@ -174,10 +178,13 @@ if test "x$cfg_yorick" = "xyorick" \
 fi
 echo >&2 "Yorick executable --------> $cfg_yorick"
 
-# Get the Y_HOME and Y_SITE variables (FIXME: use a single yorick and write
-# into a temporary file).
-echo 'write, format = "Y_HOME=%s\\nY_SITE=%s\\n", Y_HOME, Y_SITE; quit;' \
-  | "$cfg_yorick" | cat > "$cfg_tmpfile"
+# Get the Y_HOME and Y_SITE variables.
+cat >"$cfg_tmpfile.i" <<EOF
+write, format = "Y_HOME=%s\nY_SITE=%s\n", Y_HOME, Y_SITE;
+quit;
+EOF
+"$cfg_yorick" -batch "$cfg_tmpfile.i" > "$cfg_tmpfile"
+
 cfg_yhome=$(sed < "$cfg_tmpfile" -e '/^Y_HOME=/!d;s/^Y_HOME=//')
 cfg_ysite=$(sed < "$cfg_tmpfile" -e '/^Y_SITE=/!d;s/^Y_SITE=//')
 cfg_ymkdir=$cfg_yhome
