@@ -96,6 +96,7 @@
 #include <yapi.h>
 
 #include <gsl/gsl_sf.h>
+#include <gsl/gsl_poly.h>
 
 /* Define some macros to get rid of some GNU extensions when not compiling
    with GCC. */
@@ -492,6 +493,87 @@ FN(gsl_sf_bessel_lnKnu)
 FN(gsl_sf_bessel_Knu_scaled)
 #undef FN
 
+/*---------------------------------------------------------------------------*/
+/* POLYNOMIAL ROOTS */
+
+static void push_vector_d(long n, const double inp[])
+{
+  long dims[2];
+  double* out;
+  long j;
+
+  if (n > 0) {
+    dims[0] = 1;
+    dims[1] = n;
+    out = ypush_d(dims);
+    for (j = 0; j < n; ++j) {
+      out[j] = inp[j];
+    }
+  } else {
+    ypush_nil();
+  }
+}
+
+void Y_gsl_poly_solve_quadratic(int argc)
+{
+  double a, b, c;
+  long dims[Y_DIMSIZE];
+  double x[2];
+  const double* coef;
+  long n;
+
+  if (argc == 1) {
+    coef = ygeta_d(0, &n, dims);
+    if (dims[0] == 1 && dims[1] == 3) {
+      a = coef[0];
+      b = coef[1];
+      c = coef[2];
+    } else {
+      goto bad_args;
+    }
+  } else if (argc == 3) {
+    a = ygets_d(2);
+    b = ygets_d(1);
+    c = ygets_d(0);
+  } else {
+    bad_args:
+    y_error("expecting a 3-element vector or 3 arguments");
+    return;
+  }
+  n = gsl_poly_solve_quadratic(a, b, c, &x[0], &x[1]);
+  push_vector_d(n, x);
+}
+
+void Y_gsl_poly_solve_cubic(int argc)
+{
+  double a, b, c;
+  long dims[Y_DIMSIZE];
+  double x[3];
+  const double* coef;
+  long n;
+
+  if (argc == 1) {
+    coef = ygeta_d(0, &n, dims);
+    if (dims[0] == 1 && dims[1] == 3) {
+      a = coef[0];
+      b = coef[1];
+      c = coef[2];
+    } else {
+      goto bad_args;
+    }
+  } else if (argc == 3) {
+    a = ygets_d(2);
+    b = ygets_d(1);
+    c = ygets_d(0);
+  } else {
+    bad_args:
+    y_error("expecting a 3-element vector or 3 arguments");
+    return;
+  }
+  n = gsl_poly_solve_cubic(a, b, c, &x[0], &x[1], &x[2]);
+  push_vector_d(n, x);
+}
+
 /*
  * Local Variables:
  * mode: C
@@ -500,5 +582,6 @@ FN(gsl_sf_bessel_Knu_scaled)
  * indent-tabs-mode: nil
  * fill-column: 78
  * coding: utf-8
+ * ispell-local-dictionary: "american"
  * End:
  */
