@@ -857,6 +857,33 @@ extern gsl_sf_eta;
  * SEE ALSO: gsl_sf.
  */
 
+extern gsl_poly_solve_quadratic;
+extern gsl_poly_solve_cubic;
+/* DOCUMENT x = gsl_poly_solve_quadratic(a, b, c);
+         or x = gsl_poly_solve_quadratic(v);
+         or x = gsl_poly_solve_cubic(a, b, c);
+         or x = gsl_poly_solve_cubic(v);
+
+      These functions return the real roots of a quadratic or cubic polynomials
+      with real coefficients A, B and C.  When called with a single argument,
+      it must be a vector of coefficients: V = [A,B,C].
+
+      If there are no roots, an empty result is returned otherwise a vector of
+      1, 2, or 3 roots is returned.  The roots are sorted in ascending order.
+      The case of coincident roots is not considered special.  Therefore,
+      either 0 or 1 or 2 roots are returned for a quadratic polynomial (a
+      single root only occurs if A=0) and either 0 or 1 or 3 roots are
+      returned for a cubic polynomial.
+
+      The roots X are such that:
+
+        A*X^2 + B*X + C = 0
+        X^3 + A*X^2 + B*X + C = 0
+
+      for a quadratic and a cubic polynomial respectively.
+
+*/
+
 /*
  * Local Variables:
  * mode: Yorick
