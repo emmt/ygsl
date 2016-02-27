@@ -30,14 +30,14 @@ More detailled explanations are given below.
 1. You must have Yorick and the GSL (GNU Scientific Library) installed
    on your machine.  (See the *"Links"* section below.)
 
-2. Unpack the plug-in code somewhere.
+2. Unpack the software code somewhere or clone the Git repository.
 
 3. Configure for compilation.  The are two possibilities:
 
-   For an **in-place build**, go to the source directory of the plug-in
+   For an **in-place build**, go to the source directory of the software
    code and run the configuration script:
    ````
-   $ cd SRC_DIR
+   $ cd $SRC_DIR
    $ ./configure
    ````
    To see the configuration options, call:
@@ -45,26 +45,26 @@ More detailled explanations are given below.
    $ ./configure --help
    ````
    
-   To compile in a **different build directory**, say BUILD_DIR, create the
+   To compile in a **different build directory**, say `$BUILD_DIR`, create the
    build directory, go to the build directory, and run the configuration
-   script:
+   script from there:
    ````
    $ mkdir -p $BUILD_DIR
    $ cd $BUILD_DIR
    $ $SRC_DIR/configure
    ````
-   where `$SRC_DIR` is the path to the source directory of the plug-in
+   where `$SRC_DIR` is the path to the source directory of the software
    code. To see the configuration options, call:
    ````
    $ $SRC_DIR/configure --help
    ````
 
-4. Compile the code:
+4. Compile the software:
    ````
    $ make
    ````
 
-4. Install the plug-in in Yorick directories:
+5. Install the software in Yorick directories:
    ````
    $ make install
    ````
