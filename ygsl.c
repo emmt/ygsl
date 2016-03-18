@@ -5,7 +5,7 @@
  *
  *-----------------------------------------------------------------------------
  *
- * Copyright (C) 2012 Éric Thiébaut <eric.thiebaut@univ-lyon1.fr>
+ * Copyright (C) 2012-2016 Éric Thiébaut <eric.thiebaut@univ-lyon1.fr>
  *
  * This software is governed by the CeCILL-C license under French law and
  * abiding by the rules of distribution of free software.  You can use, modify
@@ -573,15 +573,3 @@ void Y_gsl_poly_solve_cubic(int argc)
   n = gsl_poly_solve_cubic(a, b, c, &x[0], &x[1], &x[2]);
   push_vector_d(n, x);
 }
-
-/*
- * Local Variables:
- * mode: C
- * c-basic-offset: 2
- * tab-width: 8
- * indent-tabs-mode: nil
- * fill-column: 78
- * coding: utf-8
- * ispell-local-dictionary: "american"
- * End:
- */
