@@ -37,7 +37,7 @@ More detailled installation explanations are given below.
 1. You must have Yorick and the GSL (GNU Scientific Library) installed
    on your machine.  (See the *"Links"* section below.)
 
-2. Unpack the plug-in code somewhere.
+2. Unpack the software code somewhere or clone the Git repository.
 
 3. Configure for compilation.  There are two possibilities:
 
