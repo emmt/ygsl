@@ -45,7 +45,7 @@ PKG_I_START=${srcdir}/gsl-start.i
 # non-pkg.i include files for this package, if any
 PKG_I_EXTRA=
 
-RELEASE_FILES = AUTHORS LICENSE Makefile NEWS README.md TODO \
+RELEASE_FILES = AUTHORS LICENSE Makefile NEWS README.md \
 	configure gsl.i gsl-start.i ygsl.c
 RELEASE_NAME = $(PKG_NAME)-$(RELEASE_VERSION).tar.bz2
 

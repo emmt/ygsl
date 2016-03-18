@@ -1,3 +1,0 @@
- - make a portable configure-like script able to build
-   a plugin in a remote directory
- - change Yorick Make(file)s to use ${srcdir}
