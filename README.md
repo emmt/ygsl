@@ -21,7 +21,7 @@ source directories can be the same in which case, call `./configure` to
 configure for building.
 
 If the plug-in has been properly installed, it is sufficient to use any
-function of YFITSIO to automatically load the plug-in.  You may force the
+function of YGSL to automatically load the plug-in.  You may force the
 loading of the plug-in by something like:
 ````{.sh}
 #include "gsl.i"
